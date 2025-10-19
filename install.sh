@@ -27,10 +27,31 @@ PATH=/usr/sbin:/usr/bin:/sbin:/bin
 
 # installer main body:
 _main() {
+  # ensure $1 exists so 'set -u' doesn't error out
+  { [ "$#" -eq "0" ] && set -- ""; } > /dev/null 2>&1
+
   # detect environment
   PVE=$(systemctl show pveproxy.service --no-page | grep 'LoadState=' | cut -f2 -d=)
   PMG=$(systemctl show pmgproxy.service --no-page | grep 'LoadState=' | cut -f2 -d=)
   PBS=$(systemctl show proxmox-backup-proxy.service --no-page | grep 'LoadState=' | cut -f2 -d=)
+
+  # force environment
+  case "$1" in
+    "--pve")
+      PMG=""
+      PBS=""
+      ;;
+    "--pmg")
+      PVE=""
+      PBS=""
+      ;;
+    "--pbs")
+      PVE=""
+      PMG=""
+      ;;
+  esac
+
+  # set environment
   if [ "$PVE" = "loaded" ]; then
     SERVICE="pve"
     SERVICE_MANAGER="pve-manager"
@@ -44,10 +65,6 @@ _main() {
     echo "No Proxmox service detected; exiting."
     exit 1
   fi
-
-
-  # ensure $1 exists so 'set -u' doesn't error out
-  { [ "$#" -eq "0" ] && set -- ""; } > /dev/null 2>&1
 
   case "$1" in
     "--emit")

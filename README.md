@@ -1,3 +1,8 @@
+This is a fork of:
+- https://github.com/Yukigamine/pve-nag-buster
+- https://github.com/foundObjects/pve-nag-buster
+
+
 ## pve-nag-buster 
 https://github.com/foundObjects/pve-nag-buster
 
@@ -25,27 +30,27 @@ packages installed with PVE by default.
 
 ### Installation
 ```sh
-wget https://raw.githubusercontent.com/foundObjects/pve-nag-buster/master/install.sh
+git clone https://github.com/lrollins805/pve-nag-buster.git
+cd pve-nag-buster && chmod a+x install.sh
 
 # Always read scripts downloaded from the internet before running them with sudo
-sudo bash install.sh
+sudo ./install.sh
 
-# or ..
-chmod +x install.sh && sudo ./install.sh
-```
-
-With Git:
-```sh
-git clone https://github.com/foundObjects/pve-nag-buster.git
-
-# Always read scripts downloaded from the internet before running them with sudo
-cd pve-nag-buster && sudo ./install.sh
+# to force installation type (when more than one is installed)
+sudo ./install.sh --pve
+sudo ./install.sh --pmg
+sudo ./install.sh --pbs
 ```
 
 ### Uninstall:
 ```sh
 sudo ./install.sh --uninstall
 # remove /etc/apt/sources.list.d/pve-no-subscription.list if desired
+
+# to force uninstall type (when more than one is installed)
+sudo ./install.sh --pve --uninstall
+sudo ./install.sh --pmg --uninstall
+sudo ./install.sh --pbs --uninstall
 ```
 
 ### Notes:
