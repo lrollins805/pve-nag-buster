@@ -40,14 +40,17 @@ _main() {
     "--pve")
       PMG=""
       PBS=""
+      shift
       ;;
     "--pmg")
       PVE=""
       PBS=""
+      shift
       ;;
     "--pbs")
       PVE=""
       PMG=""
+      shift
       ;;
   esac
 
@@ -65,6 +68,9 @@ _main() {
     echo "No Proxmox service detected; exiting."
     exit 1
   fi
+
+  # ensure $1 exists so 'set -u' doesn't error out
+  { [ "$#" -eq "0" ] && set -- ""; } > /dev/null 2>&1
 
   case "$1" in
     "--emit")
