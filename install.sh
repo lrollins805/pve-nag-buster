@@ -83,6 +83,8 @@ _main() {
       assert_root
       _install "$@"
       ;;
+    "--pve" | "--pmd" | "--pbs")
+      ;;
     *)
       # unknown flags, print usage and exit
       _usage
@@ -193,6 +195,6 @@ emit_script() {
 }
 
 assert_root() { [ "$(id -u)" -eq '0' ] || { echo "This action requires root." && exit 1; }; }
-_usage() { echo "Usage: $(basename "$0") (--emit|--offline|--uninstall)"; }
+_usage() { echo "Usage: $(basename "$0") [--pve|--pmd|--pbs] [--emit|--offline|--uninstall]"; }
 
 _main "$@"
