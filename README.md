@@ -31,10 +31,9 @@ packages installed with PVE by default.
 ### Installation
 ```sh
 git clone https://github.com/lrollins805/pve-nag-buster.git
-cd pve-nag-buster && chmod a+x install.sh
 
 # Always read scripts downloaded from the internet before running them with sudo
-sudo ./install.sh
+cd pve-nag-buster && sudo ./install.sh
 
 # to force installation type (when more than one is installed)
 sudo ./install.sh --pve
